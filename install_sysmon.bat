@@ -19,7 +19,8 @@ echo [+] Downloading Sysmon...
 echo [+] Downloading Sysmon config...
 @powershell (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/Netsmart-OneTeam/sysmon-config/main/sysmonconfig-export.xml','C:\Sysmon\sysmonconfig-export.xml')"
 @powershell (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/Netsmart-OneTeam/sysmon-config/main/auto_update.bat','C:\Sysmon\auto_update.bat')"
-sysmon64.exe -accepteula -i sysmonconfig-export.xml
+sysmon64.exe -u
+c:\sysmon\sysmon64.exe -accepteula -i sysmonconfig-export.xml
 echo [+] Sysmon Successfully Installed!
 REM attrib +s +h +r c:\Sysmon
 REM echo Y | cacls c:\Sysmon /e /p everyone:n
@@ -29,6 +30,6 @@ sc failure Sysmon64 actions= restart/10000/restart/10000// reset= 120
 echo [+] Sysmon Directory Permissions Reset and Services Hidden
 REM sc sdset Sysmon64 D:(D;;DCLCWPDTSD;;;IU)(D;;DCLCWPDTSD;;;SU)(D;;DCLCWPDTSD;;;BA)(A;;CCLCSWLOCRRC;;;IU)(A;;CCLCSWLOCRRC;;;SU)(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)S:(AU;FA;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;WD)
 echo [+] Creating Auto Update Task set to Hourly..
-SchTasks /Create /RU SYSTEM /RL HIGHEST /SC HOURLY /TN "Netsmart\Update_Sysmon_Rules" /TR C:\Sysmon\auto_update.bat /F /ST %tasktime%
+SchTasks /Create /RU SYSTEM /RL HIGHEST /SC HOURLY /TN "Netsmart\Update_Sysmon_Rules" /TR C:\Sysmon\Auto_Update.bat /F /ST %tasktime%
 timeout /t 10
 exit
