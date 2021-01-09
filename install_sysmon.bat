@@ -17,8 +17,8 @@ pushd "C:\Sysmon\"
 echo [+] Downloading Sysmon...
 @powershell (new-object System.Net.WebClient).DownloadFile('https://live.sysinternals.com/Sysmon64.exe','C:\Sysmon\sysmon64.exe')"
 echo [+] Downloading Sysmon config...
-@powershell (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/Netsmart-OneTeam/sysmon-config/master/sysmonconfig-export.xml','C:\Sysmon\sysmonconfig-export.xml')"
-@powershell (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/Netsmart-OneTeam/sysmon-config/master/Auto_update.bat','C:\Sysmon\Auto_Update.bat')"
+@powershell (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/Netsmart-OneTeam/sysmon-config/main/sysmonconfig-export.xml','C:\Sysmon\sysmonconfig-export.xml')"
+@powershell (new-object System.Net.WebClient).DownloadFile('https://raw.githubusercontent.com/Netsmart-OneTeam/sysmon-config/main/Auto_update.bat','C:\Sysmon\Auto_Update.bat')"
 sysmon64.exe -accepteula -i sysmonconfig-export.xml
 echo [+] Sysmon Successfully Installed!
 REM attrib +s +h +r c:\Sysmon
